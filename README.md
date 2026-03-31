@@ -94,8 +94,4 @@ Future improvements will focus on enhanced preprocessing, better calibration tec
 
 ---
 
-<p align="center">
-  <span style="color:#8A2BE2;">✧ Functional • Scalable • CubeSat-Ready ✧</span>
-</p>
 
----
