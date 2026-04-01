@@ -1,22 +1,26 @@
 <h1 align="center">
-  <span style="color:#00FFFF;"> ٠ ࣪⭑CubeSat Star Tracker๋࣭ ⭑</span>
+  <span style="color:#00FFFF;"> ٠ ࣪⭑Experimental CubeSat Star Tracker๋࣭ ⭑</span>
 </h1>
-
 
 
 ## ✦ Summary ✦
 
-This project presents a MATLAB-based prototype of a star tracker pipeline developed to explore the fundamentals of spacecraft attitude determination using star field images. The system operates on BMP images captured from an MT9P031 CMOS sensor and demonstrates key steps involved in real-world star tracker algorithms.
+This project presents a MATLAB-based prototype of a star tracker pipeline developed to explore the fundamentals of spacecraft attitude determination using star field images. The system operates on **BMP** images captured from an MT9P031 CMOS sensor and demonstrates key steps involved in real-world star tracker algorithms. <br>
+The imaging process is approximated using an inverse pinhole camera model to convert 2D pixel coordinates into 3D unit vectors. Lens distortion is corrected using the Brown distortion model, with calibration parameters obtained via **Astrometry.net(nova.astrometry)(plate solving website)**. While this provides a reasonable approximation, the model does not account for all real-world optical and sensor imperfections. <br>
+Star detection is implemented using intensity thresholding followed by 4-connected **region growing**. Detected regions are processed to compute sub-pixel centroids using a weighted center-of-gravity approach. This method works well for clear star-like blobs but may be sensitive to noise and threshold selection. <br>
+For star identification, a small, reduced reference catalog (~60 **Hipparcos-2** stars in the Gemini region) is used instead of a full-sky catalog. Triangle-based geometric features are generated from inter-star angular distances and matched using a hash-based approach. This simplifies the matching problem but limits robustness and scalability. <br>
+Candidate matches are validated by solving Wahba’s problem using SVD (Kabsch algorithm) to estimate rotation and minimize reprojection error. The final attitude is selected based on consistency across detected stars, and results are expressed as a rotation matrix and Euler angles. <br>
+Overall, this implementation is intended as a **learning-oriented** and proof-of-concept system, illustrating the core principles behind star trackers rather than a flight-ready or highly optimized solution.
 
-The imaging process is approximated using a pinhole camera model to convert 2D pixel coordinates into 3D unit vectors. Lens distortion is corrected using the Brown distortion model, with calibration parameters obtained via Astrometry.net. While this provides a reasonable approximation, the model does not account for all real-world optical and sensor imperfections.
-
-Star detection is implemented using intensity thresholding followed by 4-connected region growing. Detected regions are processed to compute sub-pixel centroids using a weighted center-of-gravity approach. This method works well for clear star-like blobs but may be sensitive to noise and threshold selection.
-
-For star identification, a small, reduced reference catalog (~60 Hipparcos-2 stars in the Gemini region) is used instead of a full-sky catalog. Triangle-based geometric features are generated from inter-star angular distances and matched using a hash-based approach. This simplifies the matching problem but limits robustness and scalability.
-
-Candidate matches are validated by solving Wahba’s problem using SVD (Kabsch algorithm) to estimate rotation and minimize reprojection error. The final attitude is selected based on consistency across detected stars, and results are expressed as a rotation matrix and Euler angles.
-
-Overall, this implementation is intended as a learning-oriented and proof-of-concept system, illustrating the core principles behind star trackers rather than a flight-ready or highly optimized solution.
+### Random Notes
+⭑ I'll be dumping everything I EVER came across or tried to use in the **extra folder** - research papers, catalogues (reduced), files from Nova, etc.** <br>
+⭑ A lot of things are yet to be fixed/changed since they affect accuracy or increase latency a lot (and there are definitely better modern methods), but I couldn't.
+⭑ PS: Use the Tycho-2 Catalog for fainter stars' magnitudes if needed.** <br>
+⭑ Also, tip: .fits format can't be directly opened, so I *generated* quick-fix Python scripts for it. They did the job, but weren’t maintained so use them carefully or        consider writing new ones.** <br>
+⭑ Tried a few plate solving software… welp, turns out that’s a whole course on its own.** <br>
+⭑ Currently, it takes ~50 sec to solve an image after partially parallelizing the tridb (earlier ~1:10 min) Ik that is really slow.** <br>
+⭑ Finding images (with less distortion) is actually a big task in itself. Better to get in touch with someone who has worked on actual star trackers before for them, and to   also know what things/parameters are considered (insight and guidance)** <br>
+⭑ Wanted to go with geometric voting algo (GVA), but ran into too many issues during implementation.**
 
 ### main.m
 img = imread('images/bmp_4.bmp')<br>
@@ -32,7 +36,7 @@ matches = pattern_matching(... )<br>
 [R_best, bestMatch, v_rotated] = attitude_determination(... )<br>
 
 • Loads and converts image to double<br>
-• Creates subsampled grid for candidate detection<br>
+• Creates a subsampled grid for candidate detection<br>
 • Applies threshold to identify bright pixels<br>
 • Calls region growing to extract star regions<br>
 • Calls centroiding to compute star centers<br>
@@ -190,3 +194,6 @@ score = sum(min(dist,[],2) < 0.01)<br>
 • Computes distance to catalog vectors<br>
 • Counts number of consistent matches<br>
 • Selects best rotation based on score and error<br>
+
+
+
