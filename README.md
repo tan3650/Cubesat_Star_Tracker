@@ -12,7 +12,7 @@ For star identification, a small, reduced reference catalog (~60 **Hipparcos-2**
 Candidate matches are validated by solving Wahba’s problem using SVD (Kabsch algorithm) to estimate rotation and minimize reprojection error. The final attitude is selected based on consistency across detected stars, and results are expressed as a rotation matrix and Euler angles. <br>
 Overall, this implementation is intended as a **learning-oriented** and proof-of-concept system, illustrating the core principles behind star trackers rather than a flight-ready or highly optimized solution.
 
-<img width="480" height="246" alt="Screenshot (994)" src="https://github.com/user-attachments/assets/5d02052a-dd08-4c9f-824c-c89a425cab40" /><img width="320" height="207" alt="Screenshot (430)" src="https://github.com/user-attachments/assets/2f5aec61-dffe-4798-b17d-8d1ca99f53d7" />
+<img width="480" height="246" alt="Screenshot (994)" src="https://github.com/user-attachments/assets/5d02052a-dd08-4c9f-824c-c89a425cab40" /><img width="320" height="246" alt="Screenshot (430)" src="https://github.com/user-attachments/assets/2f5aec61-dffe-4798-b17d-8d1ca99f53d7" />
 
 
 ### Random Notes
