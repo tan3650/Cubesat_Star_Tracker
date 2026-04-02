@@ -103,12 +103,6 @@ Overall, this is a learning-oriented prototype intended to explore the core conc
 • Converts keys to string format<br>
 • Returns list of candidate hash keys<br>
 
-### hash_triangle_matching.m
-• Matches detected triangle hash keys with catalog hash keys<br>
-• Retrieves candidate catalog triangles from hash database<br>
-• Compares detected and catalog triangle correspondences<br>
-• Outputs possible triangle matches for further validation<br>
-
 ### hash_triangle_debug.m
 • Generates triangles from detected stars<br>
 • Computes angular distances for each triangle<br>
@@ -136,10 +130,17 @@ Overall, this is a learning-oriented prototype intended to explore the core conc
 • Counts number of consistent matches<br>
 • Selects best rotation based on score and error<br>
 
-### image_plane.m
+-----------------------------------------------------------------------
+### image_plane.m (no need after updating pixtvect) but otherwise
 • Converts pixel coordinates into image plane coordinates<br>
 • Shifts coordinates relative to principal point<br>
 • Scales using camera parameters<br>
 • Prepares coordinates for geometric transformations<br>
+
+### hash_triangle_matching.m (old)
+• Matches detected triangle hash keys with catalog hash keys<br>
+• Retrieves candidate catalog triangles from hash database<br>
+• Compares detected and catalog triangle correspondences<br>
+• Outputs possible triangle matches for further validation<br>
 
 
