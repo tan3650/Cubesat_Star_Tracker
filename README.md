@@ -1,5 +1,5 @@
 <h1 align="center">
-  <span style="color:#00FFFF;"> ٠ ࣪⭑ Star Tracker๋࣭ (Just Exploring) ⭑</span>
+  <span style="color:#00FFFF;"> ٠ ࣪⭑ CubeSat Star Tracker (Algorithmic Exploration) ⭑٠ ࣪</span>
 </h1>
 
 
