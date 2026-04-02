@@ -77,10 +77,11 @@ Overall, this is a learning-oriented prototype intended to explore the core conc
 • Computes Cartesian unit vectors<br>
 • Returns vectors and star names<br>
 
-### build_triangle_db.m
-• Generates all triplets of catalog stars<br>
-• Computes angular features for each triangle<br>
-• Converts features to hash keys<br>
+### build_triangle_db.m 
+• Uses the catalog vectors generated to:<br>
+• Generate all triplets of catalog stars<br> (||)
+• Compute angular features for each triangle<br>
+• Convert features to hash keys<br>
 • Stores triangle indices in hash map<br>
 
 ### triangle_angles.m
